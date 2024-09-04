@@ -10,3 +10,9 @@ let sayHi = function(){
 sayHi();
 
 //console.log(firstName)
+
+function add(a,b){
+    let answer = a + b;
+    return answer;
+};
+console.log(add (100,5000))
