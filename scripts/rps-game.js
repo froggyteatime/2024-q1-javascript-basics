@@ -23,6 +23,26 @@ let btnScissors = document.getElementById("btn-scissors");
 
 //btnScissors?.addEventListener("click",scissorsClicked);
 
+let weapons =[
+    {
+        type:"Rock",
+        beats:"Scissors",
+    },
+    {
+        type:"paper",
+        beats:"Rock",
+    },
+    {
+        type:"Scissors",
+        beats:"paper"
+    }
+];
+
+function pickRandomWeapon(weapon){
+    let randy = Math.floor(Math.random()*weapons.length);
+    return weapons[randy];
+};
+
 function playerControlHandler(e){
     let weaponName = e.target.innerText;
     console.log(weaponName, "was selected");
