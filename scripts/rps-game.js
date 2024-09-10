@@ -4,8 +4,13 @@ let playerControls = document.getElementById("player-controls");
 //let btnRock = document.getElementById("btn-rock");
 //let btnPaper = document.getElementById("btn-paper");
 //let btnScissors = document.getElementById("btn-scissors");
+/** @type { HTMLElement }*/
+//@ts-ignore We know 
+let gameResultHeader = document.getElementById("game-results")
 
-// let isGameOver = false
+gameResultHeader.innerText = "Hey there!";
+
+let isGameOver = false
 //function rockClicked(name){
     //console.log("rock was selected");
 //}
