@@ -1,16 +1,22 @@
 //@ts-check
 
-let playerControls = document.getElementById("player-controls");
+//let playerControls = document.getElementById("player-controls");
 //let btnRock = document.getElementById("btn-rock");
 //let btnPaper = document.getElementById("btn-paper");
 //let btnScissors = document.getElementById("btn-scissors");
 /** @type { HTMLElement }*/
 //@ts-ignore We know 
-let gameResultHeader = document.getElementById("game-results")
+let playerControls = document.getElementById("player-controls");
+/** @type { HTMLElement }*/
+//@ts-ignore We know 
+let gameResultHeader = document.getElementById("game-results");
+/** @type { HTMLElement }*/
+//@ts-ignore We know 
+let gameRestartHeader = document.getElementById("game-restart");
 
 gameResultHeader.innerText = "Hey there!";
 
-let isGameOver = false
+let isGameOver = false;
 //function rockClicked(name){
     //console.log("rock was selected");
 //}
@@ -63,9 +69,12 @@ function determineOutcome(playerWeapon,computerWeapon) {
 }
 
 function playerControlHandler(e){
-    //if(isGameOver){
-     //   return;
-   // }
+    if(isGameOver){
+       return;
+    }
+
+
+
 
     let weaponName = e.target.innerText;
     let playerWeapon = weapons.find(w => w.type === weaponName);
@@ -79,6 +88,20 @@ function playerControlHandler(e){
     let result = determineOutcome(playerWeapon,computerWeapon);
     console.log(result);
 }
-
-
-playerControls?.addEventListener("click",playerControlHandler);
+function gameRestartHandler(e){
+    if (e.target.id === "btn-restart") {
+		isGameOver = false;
+		showPlayerControls();
+		gameResultHeader.innerText = "";
+	}
+};
+function showRestart(){
+    gameRestartHeader.style.display ="initial"
+    playerControls.style.display ="none"
+};
+function showPlayerControls(){
+    gameRestartHeader.style.display ="none"
+    playerControls.style.display ="initial"
+}
+playerControls.addEventListener("click",playerControlHandler);
+gameRestartHeader.addEventListener("click", gameRestartHandler);
