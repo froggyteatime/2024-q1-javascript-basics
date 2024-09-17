@@ -1,4 +1,5 @@
 //@ts-check
+
 class Cheese {
     constructor(type){
         this.type = type;
@@ -6,6 +7,7 @@ class Cheese {
         this.age = 0;
         this.cost = 0.0;
     }
+    
     eat() {
         console.log(`Nom nom nom ${this.type} is yummy!`);
     }
