@@ -7,36 +7,74 @@ const canvas = document.getElementById("game-canvas");
 //@ts-ignore canvas is an HTMLCanvasElement
 const ctx = canvas.getContext("2d");
 
-ctx.fillStyle = "hsla(0,100%,50%,100%)";
-//"#00ff00"
-//"red"
+class SquareShape {
+	constructor(x, y) {
+		this.x = x;
+		this.y = y;
 
-ctx.fillRect(0, 0, 50, 50);
+		this.width = 50;
+		this.height = this.width;
+		this.hue = 0;
 
-ctx.beginPath();
-ctx.arc(100, 100, 25, 0, Math.PI * 2);
-ctx.fill();
+		this.speedMult = 11;
+		this.speedX = Math.floor(Math.random() * 11) + 1;
+		this.speedY = Math.floor(Math.random() * 11) + 1;
+
+		this.dirx = 1;
+		this.diry = 1;
+	}
+
+	update() {
+		this.x += this.speedX * this.dirx;
+		this.y += this.speedY * this.diry;
+		this.hue++;
+
+		if (this.hue > 360) {
+			this.hue = 0;
+		}
+
+		if (this.x < 0) {
+			//0ff screen left so move right
+			this.dirx = 1;
+		} else if (this.x + this.width > canvas.width) {
+			this.dirx = -1;
+		}
+		if (this.y < 0) {
+			//0ff screen left so move right
+			this.diry = 1;
+		} else if (this.y + this.height > canvas.height) {
+			this.diry = -1;
+		}
+	}
+
+	draw() {
+		ctx.fillStyle = `hsla(${this.hue},100%,50%,100%)`;
+		ctx.fillRect(this.x, this.y, 100, 100);
+	}
+}
+
+let s1 = new SquareShape(0, 0);
+
+let shapes =[];
+
+for (let i = 0; i < 100;i++) {
+	shapes.push(new SquareShape(0,0))
+}
 
 let lastTime = 0;
-let hue = 0;
-
-let y1 = 0;
-let x1 = 0;
-let speedx = 1;
-let Speedy = 0.5;
 
 function drawLoop(timestamp) {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	let elapsedTime = timestamp - lastTime;
 	lastTime = timestamp;
-	//console.log(elapsedTime);
-	ctx.fillStyle = `hsla(${hue},100%,50%,100%)`;
-	ctx.fillRect(x1, y1, 100, 100);
-	//hue = hue + 1;
-	//hue += 1;
-	hue++;
-	x1 += speedx;
-	y1 += Speedy;
+
+	s1.draw();
+	s1.update();
+
+	for (const shape of shapes) {
+		shape.update();
+		shape.draw();
+	}
 
 	window.requestAnimationFrame(drawLoop);
 }
