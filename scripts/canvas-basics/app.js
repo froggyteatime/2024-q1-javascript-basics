@@ -10,12 +10,12 @@ const ctx = canvas.getContext("2d");
 
 
 
-let s1 = new SquareShape(Math.floor(Math.random()*1930)+ 1, Math.floor(Math.random()* 1930)+ 1,ctx,canvas);
+let s1 = new SquareShape(Math.floor(Math.random()* 1630)+ 2, Math.floor(Math.random()* 1630)+ 2,ctx,canvas);
 
 let shapes =[];
 
 for (let i = 0; i < 100;i++) {
-	shapes.push(new SquareShape(Math.floor(Math.random()*1930)+ 1, Math.floor(Math.random()* 1930)+ 1,ctx,canvas))
+	shapes.push(new SquareShape(Math.floor(Math.random()* 1630)+ 2, Math.floor(Math.random()* 1630)+ 2,ctx,canvas))
 }
 
 let lastTime = 0;
